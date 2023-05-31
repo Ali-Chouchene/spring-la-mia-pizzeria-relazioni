@@ -1,8 +1,6 @@
 package org.java.pizza;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import org.java.pizza.serv.OffertaSpecialeService;
 import org.java.pizza.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -14,41 +12,32 @@ public class PizzaApplication implements CommandLineRunner {
 	@Autowired
 	private PizzaService pizzaService;
 
+	@Autowired
+	private OffertaSpecialeService offertaspecialeservice;
+
 	public static void main(String[] args) {
 		SpringApplication.run(PizzaApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-
-		for (Pizza val : this.getPizzas()) {
-			pizzaService.save(val);
-		}
-
-	}
-
-	public List<Pizza> getPizzas() {
-		List<Pizza> pizzas = new ArrayList<>();
-
-		pizzas.add(new Pizza("Americana", "Pomodoro, Mozzarella, Wurstel",
+		Pizza p1 = new Pizza("Americana", "Pomodoro, Mozzarella, Wurstel",
 				"https://external-preview.redd.it/bnDRcRxxhrKkypxeiM8zlAn7J1nfeo-YnIIE2uPAAOY.jpg?width=640&crop=smart&auto=webp&s=cb80465e46dac28e4b2adb8ba652371376b600b2",
-				5.5));
-		pizzas.add(new Pizza("Margherita", "Pomodoro, Mozzarella, Patatine",
+				5.5);
+		Pizza p2 = new Pizza("Margherita", "Pomodoro, Mozzarella, Patatine",
 				"https://www.lemilleeunabontadifranci.it/wp-content/uploads/2021/04/Pizza-margherita-fatta-in-casa-orizzontale.jpg",
-				5.50));
-		pizzas.add(new Pizza("Napoli", "Pomodoro, Mozzarella, Acciughe, Capperi",
-				"https://www.donnamoderna.com/content/uploads/2021/08/pizza-napoli-830x625.jpg", 1.50));
-		pizzas.add(new Pizza("4 Stagioni", "Pomodoro, Mozzarella, Carciofi, Olive, Cotto, Funghi",
-				"https://cdn.cook.stbm.it/thumbnails/ricette/144/144880/hd750x421.jpg", 7.50));
-		pizzas.add(new Pizza("Salame Piccante", "Pomodoro, Mozzarella, Salame Piccante",
-				"https://media.istockphoto.com/id/1142744772/it/foto/pizza-pepperoni-su-sfondo-di-cemento-nero.jpg?s=612x612&w=0&k=20&c=4OHrtlThkiICrHd9JSbhG1E52U-GS7am1VI_ts106_0=",
-				8.00));
-		pizzas.add(new Pizza("Speck e Bufala", "Pomodoro, Mozzarella, Speck, Bufala",
-				"https://www.50toppizza.it/wp-content/uploads/2022/05/Foscolo-Tre.jpg", 7.50));
-		pizzas.add(new Pizza("Calzone", "Pomodoro, Mozzarella, Basilico",
-				"https://blog.giallozafferano.it/giovannibrigandi69/wp-content/uploads/2019/07/FFC4F4F6-5036-4099-985E-335FB0D4EAEA.jpeg",
-				7.50));
-		return pizzas;
+				5.50);
+
+		pizzaService.save(p1);
+		pizzaService.save(p2);
+
+		OffertaSpeciale o1 = new OffertaSpeciale("10-10-2023", "10-11-2023", "Promo1", 20, p1);
+		OffertaSpeciale o2 = new OffertaSpeciale("10-10-2023", "15-10-2023", "Promo2", 35, p1);
+		OffertaSpeciale o3 = new OffertaSpeciale("15-10-2023", "10-11-2024", "Promo3", 50, p2);
+
+		offertaspecialeservice.save(o1);
+		offertaspecialeservice.save(o2);
+		offertaspecialeservice.save(o3);
 	}
 
 }
