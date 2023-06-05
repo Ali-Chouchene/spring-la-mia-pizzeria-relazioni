@@ -3,6 +3,7 @@ package org.java.pizza;
 import java.util.Arrays;
 import java.util.List;
 
+import org.java.pizza.serv.IngredienteServ;
 import org.java.pizza.serv.OffertaSpecialeService;
 import org.java.pizza.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,9 @@ public class PizzaApplication implements CommandLineRunner {
 	private PizzaService pizzaService;
 
 	@Autowired
+	private IngredienteServ ingreServ;
+
+	@Autowired
 	private OffertaSpecialeService offertaspecialeservice;
 
 	public static void main(String[] args) {
@@ -26,6 +30,9 @@ public class PizzaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Ingrediente mozz = new Ingrediente("mozzarella");
 		Ingrediente pom = new Ingrediente("pomodoro");
+
+		ingreServ.save(mozz);
+		ingreServ.save(pom);
 
 		List<Ingrediente> ingredienti = Arrays.asList(mozz, pom);
 		Pizza p1 = new Pizza("Americana", "Pomodoro, Mozzarella, Wurstel",
