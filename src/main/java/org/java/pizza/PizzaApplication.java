@@ -1,5 +1,8 @@
 package org.java.pizza;
 
+import java.util.Arrays;
+import java.util.List;
+
 import org.java.pizza.serv.OffertaSpecialeService;
 import org.java.pizza.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +24,16 @@ public class PizzaApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
+		Ingrediente mozz = new Ingrediente("mozzarella");
+		Ingrediente pom = new Ingrediente("pomodoro");
+
+		List<Ingrediente> ingredienti = Arrays.asList(mozz, pom);
 		Pizza p1 = new Pizza("Americana", "Pomodoro, Mozzarella, Wurstel",
 				"https://external-preview.redd.it/bnDRcRxxhrKkypxeiM8zlAn7J1nfeo-YnIIE2uPAAOY.jpg?width=640&crop=smart&auto=webp&s=cb80465e46dac28e4b2adb8ba652371376b600b2",
-				5.5);
+				5.5, ingredienti);
 		Pizza p2 = new Pizza("Margherita", "Pomodoro, Mozzarella, Patatine",
 				"https://www.lemilleeunabontadifranci.it/wp-content/uploads/2021/04/Pizza-margherita-fatta-in-casa-orizzontale.jpg",
-				5.50);
+				5.50, ingredienti);
 
 		pizzaService.save(p1);
 		pizzaService.save(p2);

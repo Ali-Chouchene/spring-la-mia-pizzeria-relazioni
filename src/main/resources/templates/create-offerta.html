@@ -11,23 +11,33 @@
     <div class="container mt-5 pt-5">
     <div class="mx-auto border border-secondary d-flex justify-content-center align-items-center"
         style="min-height: 65vh;width: 80%;">
-        <form id="pizza-form" th:object="${pizza}" th:action="@{/create}" method="POST">
+        <form id="off-form" th:object="${off}" method="POST">
             <div class="mb-3">
-                <label for="name" class="form-label">Nome Pizza</label>
-                <input type="text" class="form-control" id="name" th:field="*{nome}">
+                <label for="name" class="form-label">Nome Offerta</label>
+                <input type="text" class="form-control" id="name" th:field="*{name}">
                 <div id="name" class="form-text">inserisci nome della pizza</div>
 
-                <label for="description" class="form-label">Ingredienti</label>
-                <input type="text" class="form-control" id="description" th:field="*{descrizione}">
-                <div id="description" class="form-text">inserisci gli ingredienti separati da (,)</div>
+                <label for="sDate" class="form-label">Data inizio</label>
+                <input type="text" class="form-control" id="sDate" th:field="*{sDate}">
+                <div id="sDate" class="form-text">inserisci data inizio offerta</div>
 
-                <label for="img" class="form-label">Immagine</label>
-                <input type="text" class="form-control" id="img" th:field="*{foto}">
-                <div id="img" class="form-text">inserisci URL dell' immagine della pizza</div>
+                <label for="eDate" class="form-label">Data fine</label>
+                <input type="text" class="form-control" id="eDate" th:field="*{eDate}">
+                <div id="eDate" class="form-text">inserisci data fine offerta</div>
 
-                <label for="price" class="form-label">Prezzo</label>
-                <input type="number" class="form-control" id="price" th:field="*{prezzo}">
-                <div id="price" class="form-text">inserisci prezzo con il punto(.) per i decimali</div>
+                <label for="percentual" class="form-label">Percentuale sconto</label>
+                <input type="number" class="form-control" id="percentual" th:field="*{percentual}">
+                <div id="percentual" class="form-text">inserisci percentuale</div>
+                
+                <select name="pizza">
+			<option
+				th:each="pizza : ${pizzas}"
+				th:object="${pizza}"
+				th:value="*{id}"
+			>
+				[[ *{nome} ]]
+			</option>
+		</select>
                 <hr>
             </div>
             <div class="d-flex">

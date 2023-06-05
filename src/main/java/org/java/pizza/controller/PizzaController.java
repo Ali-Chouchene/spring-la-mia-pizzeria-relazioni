@@ -3,6 +3,7 @@ package org.java.pizza.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.java.pizza.OffertaSpeciale;
 import org.java.pizza.Pizza;
 import org.java.pizza.serv.PizzaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,7 @@ public class PizzaController {
 	@GetMapping("/create")
 	public String create(Model model) {
 		model.addAttribute("pizza", new Pizza());
+		model.addAttribute("offerta", new OffertaSpeciale());
 		return "create";
 
 	}

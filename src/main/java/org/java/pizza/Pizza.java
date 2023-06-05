@@ -6,6 +6,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -24,14 +25,19 @@ public class Pizza {
 	@OneToMany(mappedBy = "pizza")
 	private List<OffertaSpeciale> offertaspeciale;
 
+	@ManyToMany
+	private List<Ingrediente> ingredienti;
+
 	public Pizza() {
 	}
 
-	public Pizza(String nome, String descrizione, String foto, Double prezzo) {
+	public Pizza(String nome, String descrizione, String foto, Double prezzo, List<Ingrediente> ingredienti) {
 		setNome(nome);
 		setDescrizione(descrizione);
 		setFoto(foto);
 		setPrezzo(prezzo);
+
+		setIngrediente(ingredienti);
 	}
 
 	public int getId() {
@@ -72,6 +78,25 @@ public class Pizza {
 
 	public void setPrezzo(Double prezzo) {
 		this.prezzo = prezzo;
+	}
+
+	public List<Ingrediente> getIngrediente() {
+		return ingredienti;
+	}
+
+	public void setIngrediente(List<Ingrediente> ingredienti) {
+
+		this.ingredienti = ingredienti;
+	}
+
+	public void addIngrediente(Ingrediente ingrediente) {
+
+		getIngrediente().add(ingrediente);
+	}
+
+	public void removeCategory(Ingrediente ingrediente) {
+
+		getIngrediente().remove(ingrediente);
 	}
 
 	@Override
