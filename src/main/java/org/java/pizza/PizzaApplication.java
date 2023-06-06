@@ -30,9 +30,10 @@ public class PizzaApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		Ingrediente mozz = new Ingrediente("mozzarella");
 		Ingrediente pom = new Ingrediente("pomodoro");
-
+		Ingrediente prosc = new Ingrediente("prosciutto");
 		ingreServ.save(mozz);
 		ingreServ.save(pom);
+		ingreServ.save(prosc);
 
 		List<Ingrediente> ingredienti = Arrays.asList(mozz, pom);
 		Pizza p1 = new Pizza("Americana", "Pomodoro, Mozzarella, Wurstel",

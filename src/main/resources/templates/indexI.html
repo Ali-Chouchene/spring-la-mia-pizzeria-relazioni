@@ -24,41 +24,37 @@
             </div>  
         <div class="mx-auto border border-secondary" style="min-height: 65vh;width: 80%;">
         <div class="my-3 d-flex justify-content-center">
-        <a class="btn btn-success w-25" th:href="@{/create}"><i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i> Crea nuova pizza</a>
-         <a class="btn btn-success w-25 ms-3" th:href="@{/ingredienti}"><i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i> Lista ingredienti</a>
+        <a class="btn btn-success w-25" th:href="@{/offerte/create-offerta}"><i class="fa-solid fa-plus fa-xl" style="color: #ffffff;"></i> Crea nuova offerta</a>
         </div>
  
             <table class="table">
                 <thead>
                     <tr class="text-center">
-                        <th scope="col"></th>
                         <th scope="col">
-                            <h4>Pizza</h4>
+                            <h4>Nome</h4>
                         </th>
                         <th scope="col">
-                            <h4>Ingredienti</h4>
+                            <h4>Modifica</h4>
                         </th>
-                  
                         <th scope="col">
-                            <h4>Vedi</h4>
+                            <h4>Elimina</h4>
                         </th>
-
-                    </tr>
+                 </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="pizza : ${pizzas}" th:object="${pizza}" class="text-center">
-                        <td><img class="img-fluid" style="width: 250px;height: 200px" th:src="${pizza.foto}" alt="">
-                        </td>
+                    <tr th:each="ing : ${ingredienti}" th:object="${ing}" class="text-center">
                         <td class="py-5">
                             <h6>[[ *{nome} ]]</h6>
                         </td>
                         <td class="py-5">
-                            <h6>[[ *{descrizione} ]]</h6>
+                           <a th:href="@{/updateI/{id}(id=${ing.id})}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square fa-xl" style="color: #ffffff;"></i></a>
+                        </td>
+                        <td class="py-5">
+                            <form th:action="@{'/deleteI/{id}' (id=${ing.id})}" method="Post">
+     <button type="submit" class="btn btn-danger"><i class="fa-solid fa-trash fa-xl" style="color: #ffffff;"></i></button>
+     </form>
                         </td>
                       
-                        <td class="py-5"><a class="btn btn-success" th:href="@{/pizza/{id}(id=${pizza.id})}"><i
-                                    class="fa-solid fa-pizza-slice fa-rotate-90 fa-xl" style="color: #ffffff;"></i></a>
-                        </td>
                     </tr>
                 </tbody>
             </table>
